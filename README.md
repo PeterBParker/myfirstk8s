@@ -21,6 +21,7 @@ This repository holds the artifacts I developed to deploy a realistic kubernetes
 - [x] Dockerize the application
 - [x] Deploy the application in kubernetes cluster
 - [x] Deploy a load balancer in the cluster
+- [ ] Deploy a PV in the cluster
 - [ ] Deploy a PVC in the cluster
 
 ## Troubleshooting

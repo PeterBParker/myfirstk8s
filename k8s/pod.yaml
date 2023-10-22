@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tasker-app
+  namespace: default
+  labels:
+    app: tasker-app
+spec:
+  volumes:
+    - name: tasker-storage
+      persistentVolumeClaim:
+        claimName: pv-claim
+  containers:
+    - name: tasker-app
+      image: tasker:1.0.0
+      imagePullPolicy: Never
+      ports:
+        - containerPort: 3000
+      volumeMounts:
+        - mountPath: "/app/persistent-data"
+          name: tasker-storage

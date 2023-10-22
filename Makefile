@@ -4,15 +4,21 @@ docker:
 
 .PHONY: deploy
 deploy: docker
-	kubectl apply -f ./k8s/deployment.yaml
+	mkdir /tmp/data
+	kubectl apply -f ./k8s/pv.yaml
+	kubectl apply -f ./k8s/pvc.yaml
+	kubectl apply -f ./k8s/pod.yaml
 	kubectl apply -f ./k8s/service.yaml
 	kubectl apply -f ./k8s/ingress.yaml
+	
 
 .PHONY: destroy
 destroy:
-	kubectl delete deployment tasker-app-deployment
+	kubectl delete pod tasker-app
 	kubectl delete service tasker-app
 	kubectl delete ingress minimal-ingress
+	kubectl delete pv my-harddrive
+	kubectl delete pvc pv-claim
 
 .PHONY: delete-cluster
 delete-cluster:
