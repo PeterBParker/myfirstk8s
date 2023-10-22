@@ -2,10 +2,15 @@ apiVersion: v1
 kind: Service
 metadata:
   name: tasker-app
+  namespace: default
+  labels:
+    app: tasker-app
+    service: tasker-app
 spec:
   selector:
-    app.kubernetes.io/name: tasker-app
+    app: tasker-app
   ports:
     - protocol: TCP
       port: 3000
+      name: http
       targetPort: 3000

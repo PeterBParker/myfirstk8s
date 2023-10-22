@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tasker-app-deployment
+  namespace: default
+  labels:
+    app: tasker-app
 spec:
   selector:
     matchLabels:
@@ -14,6 +17,7 @@ spec:
     spec:
       containers:
         - name: tasker-app
-          image: local:tasker-app
+          image: tasker:1.0.0
+          imagePullPolicy: Never
           ports:
             - containerPort: 3000
