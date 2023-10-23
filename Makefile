@@ -4,14 +4,12 @@ docker:
 
 .PHONY: deploy
 deploy: docker
-	mkdir /tmp/data
 	kubectl apply -f ./k8s/pv.yaml
 	kubectl apply -f ./k8s/pvc.yaml
 	kubectl apply -f ./k8s/pod.yaml
 	kubectl apply -f ./k8s/service.yaml
 	kubectl apply -f ./k8s/ingress.yaml
 	
-
 .PHONY: destroy
 destroy:
 	kubectl delete pod tasker-app
