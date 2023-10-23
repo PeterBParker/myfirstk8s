@@ -5,7 +5,10 @@ import { TASK_IDEAS } from "../data/tasks";
 export const getTask: RequestHandler = (req, res, next) => {
   const newTask: Task = {
     due_date: new Date(),
-    task_name: TASK_IDEAS[Math.floor(Math.random() * TASK_IDEAS.length)],
+    task_name:
+      TASK_IDEAS.mem_store[
+        Math.floor(Math.random() * TASK_IDEAS.mem_store.length)
+      ],
   };
   res.status(200).send(
     `<h1>Task Idea</h1>
@@ -17,15 +20,17 @@ export const getTask: RequestHandler = (req, res, next) => {
 
 export const listTasks: RequestHandler = (req, res, next) => {
   let htmlList = "<ul>";
-  for (const task in TASK_IDEAS) {
-    htmlList += `<li>${TASK_IDEAS[task]}</li>`;
+  for (const task in TASK_IDEAS.mem_store) {
+    htmlList += `<li>${TASK_IDEAS.mem_store[task]}</li>`;
   }
   htmlList += "</ul>";
   res.status(200).send(`<h1>All Tasks</h1><p>${htmlList}</p>`);
 };
 
 export const addTask: RequestHandler = (req, res, next) => {
-  const text = (req.body as { task: string }).task;
-  TASK_IDEAS.push(text);
+  const text = (req.query as { task: string }).task;
+  if (text != undefined) {
+    TASK_IDEAS.add(text);
+  }
   res.status(201).send(`<h1>New Task Created!</h1><p>${text}</p>`);
 };

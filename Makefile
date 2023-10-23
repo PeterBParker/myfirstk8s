@@ -1,5 +1,6 @@
 .PHONY: docker
 docker:
+	eval $(minikube docker-env)
 	docker build -t tasker:1.0.0 .
 
 .PHONY: deploy

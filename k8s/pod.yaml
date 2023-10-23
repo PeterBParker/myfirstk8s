@@ -19,3 +19,5 @@ spec:
       volumeMounts:
         - mountPath: "/app/persistent-data"
           name: tasker-storage
+      command: ["node"]
+      args: ["dist/app.js", "--file", "/app/persistent-data/data.json"]
